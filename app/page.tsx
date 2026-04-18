@@ -16,8 +16,8 @@ export default function Dashboard() {
 
         {/* Cameras */}
         <div className="grid grid-cols-2 gap-4">
-          <CameraCard armName="Arm 1" />
-          <CameraCard armName="Arm 2" />
+          <CameraCard armName="Arm 1" armId={1} enabled />
+          <CameraCard armName="Arm 2" armId={2} enabled={false} />
         </div>
 
         {/* NLP Prediction (replaces System Status) */}
