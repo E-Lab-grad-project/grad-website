@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import CameraCard from "./components/CameraCard";
 import PromptPanel from "./components/PromptPanel";
@@ -11,8 +12,14 @@ export default function Dashboard() {
   const [predictions, setPredictions] = useState<string[]>([]);
 
   return (
-    <main className="bg-linear-to-br from-[#8E98B0] via-[#8892A9] to-[#4F5562]  p-6 h-screen">
-      <div className="grid grid-cols-[3fr_1fr] grid-rows-[2fr_1fr] gap-4 h-full">
+    <main className="relative h-screen bg-linear-to-br from-[#8E98B0] via-[#8892A9] to-[#4F5562] p-6">
+      <Link
+        href="/sandbox"
+        className="absolute right-6 top-6 z-10 rounded-lg bg-gray-800/80 px-3 py-2 text-sm font-medium text-gray-100 shadow hover:bg-gray-700/90"
+      >
+        Open sandbox
+      </Link>
+      <div className="grid h-full grid-cols-[3fr_1fr] grid-rows-[2fr_1fr] gap-4">
 
         {/* Cameras */}
         <div className="grid grid-cols-2 gap-4">

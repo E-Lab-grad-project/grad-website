@@ -12,14 +12,14 @@ export default function ControlPanel({ onPredictions }: ControlPanelProps) {
   const [arm, setArm] = useState<"arm1" | "arm2">("arm1");
 
   return (
-    <div className="bg-gray-800/80 rounded-2xl p-4 border-3 border-[#94BBE9] shadow-md shadow-gray-800">
-      <h2 className="flex items-center gap-2 font-semibold text-lg mb-3">
+    <div className="flex h-full min-h-0 flex-col rounded-2xl border-3 border-[#94BBE9] bg-gray-800/80 p-4 shadow-md shadow-gray-800">
+      <h2 className="mb-3 flex shrink-0 items-center gap-2 text-lg font-semibold">
         <Gamepad2 size={30} className="text-green-400" />
         Manual Control
       </h2>
 
       {/* Arm Selector */}
-      <div className="flex gap-2 justify-center mb-4">
+      <div className="mb-4 flex shrink-0 justify-center gap-2">
         {(["arm1", "arm2"] as const).map((a) => (
           <button
             key={a}
@@ -35,8 +35,9 @@ export default function ControlPanel({ onPredictions }: ControlPanelProps) {
         ))}
       </div>
 
-      {/* ✅ Pass predictions callback */}
-      <ArrowControls arm={arm} onPredictions={onPredictions} />
+      <div className="min-h-0 flex-1 overflow-y-auto">
+        <ArrowControls arm={arm} onPredictions={onPredictions} />
+      </div>
     </div>
   );
 }

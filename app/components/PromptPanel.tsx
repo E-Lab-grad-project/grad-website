@@ -54,7 +54,7 @@ export default function PromptPanel({ onPredictions }: PromptPanelProps) {
         }
 
       setPrompt("");
-    } catch (err) {
+    } catch {
       setError("Failed to reach NLP server");
     } finally {
       setLoading(false);
@@ -62,22 +62,25 @@ export default function PromptPanel({ onPredictions }: PromptPanelProps) {
   };
 
   return (
-    <div className="bg-gray-800/80 rounded-2xl p-4 border-3 border-[#94BBE9] flex flex-col shadow-md shadow-gray-800 ">
-      <label className="flex items-center mb-2 font-semibold text-lg">  <MessageSquare size={30} className="text-cyan-400 pr-1" /> Command Prompt </label>
+    <div className="flex h-full min-h-0 flex-col rounded-2xl border-3 border-[#94BBE9] bg-gray-800/80 p-4 shadow-md shadow-gray-800">
+      <label className="mb-2 flex shrink-0 items-center text-lg font-semibold">
+        <MessageSquare size={30} className="pr-1 text-cyan-400" /> Command Prompt
+      </label>
 
       <textarea
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         placeholder="e.g. move up then move down"
-        className="h-28 resize-none bg-gray-900 rounded-lg p-3 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#94BBE9]/50"
+        className="min-h-0 w-full flex-1 resize-none rounded-lg border border-gray-600 bg-gray-900 p-3 focus:outline-none focus:ring-2 focus:ring-[#94BBE9]/50"
       />
 
-      {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
+      {error ? <p className="mt-2 shrink-0 text-sm text-red-400">{error}</p> : null}
 
       <button
+        type="button"
         onClick={sendPrompt}
         disabled={loading}
-        className="mt-3 self-end bg-green-600 hover:bg-green-700 px-6 py-2 rounded-lg disabled:opacity-50"
+        className="mt-3 shrink-0 self-end rounded-lg bg-green-600 px-6 py-2 hover:bg-green-700 disabled:opacity-50"
       >
         {loading ? "Processing..." : "Send"}
       </button>

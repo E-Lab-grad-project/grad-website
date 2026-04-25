@@ -24,3 +24,143 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Sandbox: RGL sets pixel height on .react-grid-item; stretch the direct child so flex tiles fill vertical resizes */
+.sandbox-grid.react-grid-layout {
+  max-width: 100%;
+}
+.sandbox-grid.react-grid-layout .react-grid-item > div {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- Sandbox page motion (scoped classes) --- */
+@keyframes sandbox-enter-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sandbox-drop-glow {
+  0%,
+  100% {
+    box-shadow: inset 0 0 0 1px rgb(96 165 250 / 0.12);
+  }
+  50% {
+    box-shadow:
+      inset 0 0 0 1px rgb(96 165 250 / 0.35),
+      0 0 32px rgb(59 130 246 / 0.12);
+  }
+}
+
+@keyframes sandbox-hint-breathe {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes sandbox-tile-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.sandbox-enter-nav {
+  animation: sandbox-enter-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.sandbox-enter-header {
+  animation: sandbox-enter-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.sandbox-enter-palette {
+  animation: sandbox-enter-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+}
+
+.sandbox-palette-stagger {
+  animation: sandbox-enter-up 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.sandbox-enter-canvas {
+  animation: sandbox-enter-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+}
+
+.sandbox-palette-item {
+  transition:
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.sandbox-palette-item:hover {
+  transform: translateY(-2px);
+  border-color: rgb(94 234 212 / 0.35);
+  box-shadow:
+    0 12px 28px rgb(0 0 0 / 0.35),
+    0 0 0 1px rgb(148 187 233 / 0.25);
+}
+
+.sandbox-palette-item-dragging {
+  cursor: grabbing;
+  transform: scale(1.03) rotate(-0.5deg);
+  box-shadow:
+    0 20px 40px rgb(0 0 0 / 0.45),
+    0 0 0 2px rgb(96 165 250 / 0.55);
+  border-color: rgb(96 165 250 / 0.6);
+}
+
+.sandbox-drop-over {
+  animation: sandbox-drop-glow 1.8s ease-in-out infinite;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.sandbox-empty-hint {
+  animation: sandbox-hint-breathe 2.8s ease-in-out infinite;
+}
+
+.sandbox-tile-enter {
+  animation: sandbox-tile-pop 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sandbox-enter-nav,
+  .sandbox-enter-header,
+  .sandbox-enter-palette,
+  .sandbox-palette-stagger,
+  .sandbox-enter-canvas,
+  .sandbox-empty-hint,
+  .sandbox-tile-enter {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+
+  .sandbox-drop-over {
+    animation: none !important;
+  }
+
+  .sandbox-palette-item,
+  .sandbox-palette-item:hover,
+  .sandbox-palette-item-dragging {
+    transition: none;
+    transform: none;
+  }
+}

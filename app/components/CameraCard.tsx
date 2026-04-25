@@ -102,8 +102,8 @@ export default function CameraCard({ armName, armId, enabled = true }: Props) {
   }
 
   return (
-    <div className="bg-gray-800/80 rounded-2xl p-5 border-3 border-[#94BBE9] flex flex-col shadow-md shadow-gray-800">
-      <div className="mb-2 flex justify-between items-center">
+    <div className="flex h-full min-h-0 flex-col rounded-2xl border-3 border-[#94BBE9] bg-gray-800/80 p-5 shadow-md shadow-gray-800">
+      <div className="mb-2 flex shrink-0 items-center justify-between">
         <h2 className="flex items-center gap-2 font-semibold text-gray-200">
           <Camera size={30} className="text-blue-400" />
           {armName} Camera
@@ -111,7 +111,7 @@ export default function CameraCard({ armName, armId, enabled = true }: Props) {
         <span className={`text-lg ${status.className}`}>{status.label}</span>
       </div>
 
-      <div className="flex-1 bg-black rounded-lg flex items-center justify-center text-gray-500">
+      <div className="flex min-h-0 flex-1 items-center justify-center rounded-lg bg-black text-gray-500">
         {on ? (
           <video
             ref={videoRef}
@@ -132,6 +132,8 @@ export default function CameraCard({ armName, armId, enabled = true }: Props) {
       </div>
 
       <button
+        type="button"
+        className="mt-3 w-full shrink-0 rounded-lg bg-gray-500/80 py-2 transition enabled:hover:bg-green-600 disabled:opacity-50"
         onClick={async () => {
           if (!enabled) return;
           if (on) {
@@ -147,7 +149,6 @@ export default function CameraCard({ armName, armId, enabled = true }: Props) {
           }
         }}
         disabled={!enabled}
-        className="mt-3 bg-gray-500/80 enabled:hover:bg-green-600 disabled:opacity-50 py-2 rounded-lg transition"
       >
         {!enabled ? "Unavailable" : on ? "Turn Off" : "Turn On"}
       </button>
